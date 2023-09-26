@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="active-message"></div>
+
+    <script>
+        let messages = []
+        let n = 0
+        let looperStatus = true
+
+        messages.push({
+            time: 2000,
+            from: 'Syahrul Safarila',
+            message: 'This is a message'
+        })
+        messages.push({
+            time: 2000,
+            from: 'SySafarila',
+            message: 'This is a message also'
+        })
+        messages.push({
+            time: 3000,
+            from: 'SySafarila.com',
+            message: 'This is a message also'
+        })
+
+        setTimeout(() => {
+        }, 30000);
+
+        function showMessage() {
+            const activeMessage = document.querySelector('#active-message')
+            activeMessage.innerHTML = `From ${messages[n]?.from} - ${messages[n]?.message}`
+            setTimeout(() => {
+                clearMessage()
+                if (messages.length > n) {
+                    showMessage()
+                }
+                looperStatus = false
+            }, messages[n].time);
+            n = n + 1
+        }
+
+        function clearMessage() {
+            const activeMessage = document.querySelector('#active-message')
+            activeMessage.innerHTML = ``
+        }
+
+        function newMessage(message, from) {
+            messages.push({
+                time: 3000,
+                from: from ?? 'Someone',
+                message: message ?? ''
+            })
+            if (looperStatus == false) {
+                showMessage()
+                looperStatus = true
+            }
+        }
+
+        function run() {
+            showMessage()
+        }
+
+        run()
+    </script>
+</body>
+
+</html>
