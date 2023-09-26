@@ -5,28 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        #active-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 8px;
+            padding: 1rem;
+        }
+
+        #active-message div {
+            display: flex;
+            column-gap: 8px;
+        }
+
+        #price,
+        #from {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="active-message"></div>
+    <div id="active-message">
+        <div>
+            <span id="price"></span>
+            <span>dari</span>
+            <span id="from"></span>
+        </div>
+        <span id="message"></span>
+    </div>
 
     <script>
         let messages = []
-        let n = 0
+        let startIndex = 0
         let looperStatus = true
 
         messages.push({
-            time: 2000,
+            time: 5000,
+            price: 10000,
             from: 'Syahrul Safarila',
             message: 'This is a message'
         })
         messages.push({
-            time: 2000,
+            time: 5000,
+            price: 10000,
             from: 'SySafarila',
             message: 'This is a message also'
         })
         messages.push({
-            time: 3000,
+            time: 5000,
+            price: 10000,
             from: 'SySafarila.com',
             message: 'This is a message also'
         })
@@ -36,25 +66,29 @@
 
         function showMessage() {
             const activeMessage = document.querySelector('#active-message')
-            activeMessage.innerHTML = `From ${messages[n]?.from} - ${messages[n]?.message}`
+            activeMessage.querySelector('#price').innerHTML = messages[startIndex].price
+            activeMessage.querySelector('#from').innerHTML = messages[startIndex].from
+            activeMessage.querySelector('#message').innerHTML = messages[startIndex].message
+
             setTimeout(() => {
                 clearMessage()
-                if (messages.length > n) {
+                if (messages.length > startIndex) {
                     showMessage()
                 }
                 looperStatus = false
-            }, messages[n].time);
-            n = n + 1
+            }, messages[startIndex].time);
+            startIndex = startIndex + 1
         }
 
         function clearMessage() {
             const activeMessage = document.querySelector('#active-message')
-            activeMessage.innerHTML = ``
+            activeMessage.innerHTML = `<div><span id="price"></span><span>dari</span><span id="from"></span></div><span id="message"></span>`
         }
 
         function newMessage(message, from) {
             messages.push({
-                time: 3000,
+                time: 10000,
+                price: 10000,
                 from: from ?? 'Someone',
                 message: message ?? ''
             })
