@@ -65,6 +65,7 @@
         }, 30000);
 
         function showMessage() {
+            document.getElementById('active-message').style.display = ''
             const activeMessage = document.querySelector('#active-message')
             activeMessage.querySelector('#price').innerHTML = messages[startIndex].price
             activeMessage.querySelector('#from').innerHTML = messages[startIndex].from
@@ -81,21 +82,22 @@
         }
 
         function clearMessage() {
-            const activeMessage = document.querySelector('#active-message')
-            activeMessage.innerHTML = `<div><span id="price"></span><span>dari</span><span id="from"></span></div><span id="message"></span>`
+            document.getElementById('active-message').style.display = 'none'
         }
 
         function newMessage(message, from) {
-            messages.push({
-                time: 10000,
-                price: 10000,
-                from: from ?? 'Someone',
-                message: message ?? ''
-            })
-            if (looperStatus == false) {
-                showMessage()
-                looperStatus = true
-            }
+            setTimeout(() => {
+                messages.push({
+                    time: 10000,
+                    price: 10000,
+                    from: from ?? 'Someone',
+                    message: message ?? ''
+                })
+                if (looperStatus == false) {
+                    showMessage()
+                    looperStatus = true
+                }
+            }, 2500);
         }
 
         function run() {
