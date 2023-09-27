@@ -28,7 +28,11 @@
 </head>
 
 <body>
-    <div id="active-message">
+    <audio id="audio">
+        <source src="./src/audio/purchase.mp3">
+    </audio>
+
+    <div id="active-message" style="display: none;">
         <div>
             <span id="price"></span>
             <span>dari</span>
@@ -37,75 +41,7 @@
         <span id="message"></span>
     </div>
 
-    <script>
-        let messages = []
-        let startIndex = 0
-        let looperStatus = true
-
-        messages.push({
-            time: 5000,
-            price: 10000,
-            from: 'Syahrul Safarila',
-            message: 'This is a message'
-        })
-        messages.push({
-            time: 5000,
-            price: 10000,
-            from: 'SySafarila',
-            message: 'This is a message also'
-        })
-        messages.push({
-            time: 5000,
-            price: 10000,
-            from: 'SySafarila.com',
-            message: 'This is a message also'
-        })
-
-        setTimeout(() => {
-        }, 30000);
-
-        function showMessage() {
-            document.getElementById('active-message').style.display = ''
-            const activeMessage = document.querySelector('#active-message')
-            activeMessage.querySelector('#price').innerHTML = messages[startIndex].price
-            activeMessage.querySelector('#from').innerHTML = messages[startIndex].from
-            activeMessage.querySelector('#message').innerHTML = messages[startIndex].message
-
-            setTimeout(() => {
-                clearMessage()
-                if (messages.length > startIndex) {
-                    showMessage()
-                }
-                looperStatus = false
-            }, messages[startIndex].time);
-            startIndex = startIndex + 1
-        }
-
-        function clearMessage() {
-            document.getElementById('active-message').style.display = 'none'
-        }
-
-        function newMessage(message, from) {
-            setTimeout(() => {
-                messages.push({
-                    time: 10000,
-                    price: 10000,
-                    from: from ?? 'Someone',
-                    message: message ?? ''
-                })
-                if (looperStatus == false) {
-                    showMessage()
-                    looperStatus = true
-                }
-            }, 2500);
-        }
-
-        function run() {
-            showMessage()
-        }
-
-        run()
-    </script>
+    <script src="./src/js/show_message.js"></script>
 </body>
 
 </html>
